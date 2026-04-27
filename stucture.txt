@@ -1,0 +1,18 @@
+rag-project/
+├── data/
+├── pipelines/
+│   └── ingest.py
+├── src/
+│   ├── chunking.py
+│   ├── embedding.py
+│   ├── retrieval.py
+│   └── qa.py
+├── api/
+│   └── main.py
+├── app/
+│   └── streamlit_app.py
+├── monitoring/
+│   └── logger.py
+├── models/
+├── Dockerfile
+└── README.md
