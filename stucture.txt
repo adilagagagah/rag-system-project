@@ -1,18 +1,32 @@
-rag-project/
+rag-system-project/
 ├── data/
-├── pipelines/
-│   └── ingest.py
-├── src/
+│   ├── raw/              # PDF asli (skripsi)
+│   └── processed/        # hasil extraction + chunking (parquet/json)
+│
+├── pipelines/            # ETL pipeline
+│   ├── ingest_pdf.py
+│   ├── clean_text.py
 │   ├── chunking.py
+│   └── build_dataset.py
+│
+├── src/                  # core logic RAG
 │   ├── embedding.py
+│   ├── vector_store.py
 │   ├── retrieval.py
-│   └── qa.py
-├── api/
+│   └── qa_pipeline.py
+│
+├── api/                  # FastAPI endpoint
 │   └── main.py
-├── app/
+│
+├── app/                  # Streamlit UI
 │   └── streamlit_app.py
-├── monitoring/
+│
+├── models/               # embedding / cache (optional)
+│
+├── monitoring/           # logs query & response
 │   └── logger.py
-├── models/
+│
+├── tests/                # unit test (optional awal)
+│
 ├── Dockerfile
 └── README.md
