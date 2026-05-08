@@ -7,7 +7,8 @@ rag-system-project/
 │   ├── ingest_pdf.py
 │   ├── clean_text.py
 │   ├── chunking.py
-│   └── build_dataset.py
+│   ├── build_dataset.py
+│   └── populate_db.py
 │
 ├── src/                  # core logic RAG
 │   ├── embedding.py
@@ -22,6 +23,9 @@ rag-system-project/
 │   └── streamlit_app.py
 │
 ├── models/               # embedding / cache (optional)
+│
+├── storage/              # persistent storage
+│   └── vector_db/        # ChromaDB data
 │
 ├── monitoring/           # logs query & response
 │   └── logger.py

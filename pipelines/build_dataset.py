@@ -13,6 +13,8 @@ def main():
     # 1. Ingestion 
     print("--- Tahap 1: Ingesting PDF ---")
     pages = extract_pdf(RAW_DATA_PATH)
+    if pages:
+        print(f"\n[DEBUG] Contoh Ingestion (Page {pages[20]['page']}):\n{pages[20]['text'][:200]}...\n")
     
     # 2. Cleaning 
     print("--- Tahap 2: Cleaning Text ---")
@@ -22,9 +24,14 @@ def main():
         if cleaned_content:
             cleaned_pages.append({"page": p["page"], "text": cleaned_content})
             
+    if cleaned_pages:
+        print(f"\n[DEBUG] Contoh Cleaning (Page {cleaned_pages[18]['page']}):\n{cleaned_pages[18]['text'][:200]}...\n")
+            
     # 3. Chunking 
     print("--- Tahap 3: Creating Chunks ---")
     chunks = create_chunks(cleaned_pages)
+    if chunks:
+        print(f"\n[DEBUG] Contoh Chunking (Chunk {chunks[20]['chunk_id']}):\n{chunks[20]['content'][:200]}...\n")
     
     # 4. Storage (Data Layer) 
     print(f"--- Tahap 4: Saving {len(chunks)} chunks to Parquet ---")
