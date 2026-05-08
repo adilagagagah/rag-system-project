@@ -1,5 +1,5 @@
-from src.embedding import EmbeddingModel
-from src.vector_store import VectorStore
+from embedding import EmbeddingModel
+from vector_store import VectorStore
 
 
 class Retriever:

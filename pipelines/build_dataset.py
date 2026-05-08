@@ -1,14 +1,20 @@
 import os
+import sys
 import pandas as pd
 from tqdm import tqdm
-from ingest_pdf import extract_pdf
-from clean_text import clean_text
-from chunking import create_chunks
-from section_tagging import assign_sections
+
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(ROOT_DIR)
+
+from src.ingest_pdf import extract_pdf
+from src.clean_text import clean_text
+from src.section_tagging import assign_sections
+from src.chunking import create_chunks
+
 
 # Konfigurasi path sesuai struktur folder baru
-RAW_DATA_PATH = "data/raw/Skripsi Cetak_Gagah Pusoko Adilaga.pdf"
-PROCESSED_DATA_PATH = "data/processed/processed_data.parquet"
+RAW_DATA_PATH = os.path.normpath(os.path.join(ROOT_DIR, "data", "raw", "Skripsi Cetak_Gagah Pusoko Adilaga.pdf"))
+PROCESSED_DATA_PATH = os.path.normpath(os.path.join(ROOT_DIR, "data", "processed", "processed_data.parquet"))
 
 def main():
     # 1. Ingestion 
