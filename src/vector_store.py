@@ -15,7 +15,10 @@ class VectorStore:
         """Menyimpan chunks dan metadata ke ChromaDB"""
         ids = df['chunk_id'].tolist()
         documents = df['content'].tolist()
-        metadatas = [{"page": int(p)} for p in df['page'].tolist()]
+        
+        # Menyertakan page dan section ke dalam metadata
+        sections = df.get('section', ['Unknown'] * len(df)).tolist()
+        metadatas = [{"page": int(p), "section": str(s)} for p, s in zip(df['page'].tolist(), sections)]
 
         self.collection.upsert(
             ids=ids,

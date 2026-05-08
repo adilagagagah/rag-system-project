@@ -19,6 +19,7 @@ def create_chunks(cleaned_pages: List[Dict], chunk_size: int = 1000, chunk_overl
             final_chunks.append({
                 "chunk_id": f"p{item['page']}-c{i}",
                 "page": item["page"],
+                "section": item.get("section", "Unknown"),
                 "content": chunk
             })
     return final_chunks

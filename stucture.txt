@@ -3,18 +3,27 @@ rag-system-project/
 │   ├── raw/              # PDF asli (skripsi)
 │   └── processed/        # hasil extraction + chunking (parquet/json)
 │
-├── pipelines/            # ETL pipeline
-│   ├── ingest_pdf.py
-│   ├── clean_text.py
-│   ├── chunking.py
-│   ├── build_dataset.py
+├── pipelines/
+│   ├── build_dataset.py  # ETL pipeline
 │   └── populate_db.py
 │
-├── src/                  # core logic RAG
-│   ├── embedding.py
-│   ├── vector_store.py
-│   ├── retrieval.py
-│   └── qa_pipeline.py
+├── src/                   # core logic RAG
+│   ├── ingestion/
+│   │   └── ingest_pdf.py
+│   │
+│   ├── preprocessing/
+│   │   ├── clean_text.py
+│   │   ├── section_tagging.py
+│   │   └── chunking.py
+│   │
+│   ├── embedding/
+│   │   └── embedding.py
+│   │
+│   ├── vectordb/
+│   │   └── vector_store.py
+│   │
+│   └── retrieval/
+│       └── retrieval.py
 │
 ├── api/                  # FastAPI endpoint
 │   └── main.py

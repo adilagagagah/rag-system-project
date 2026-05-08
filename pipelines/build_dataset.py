@@ -4,6 +4,7 @@ from tqdm import tqdm
 from ingest_pdf import extract_pdf
 from clean_text import clean_text
 from chunking import create_chunks
+from section_tagging import assign_sections
 
 # Konfigurasi path sesuai struktur folder baru
 RAW_DATA_PATH = "data/raw/Skripsi Cetak_Gagah Pusoko Adilaga.pdf"
@@ -27,14 +28,20 @@ def main():
     if cleaned_pages:
         print(f"\n[DEBUG] Contoh Cleaning (Page {cleaned_pages[18]['page']}):\n{cleaned_pages[18]['text'][:200]}...\n")
             
-    # 3. Chunking 
-    print("--- Tahap 3: Creating Chunks ---")
+    # 3. Section Tagging
+    print("--- Tahap 3: Section Tagging ---")
+    cleaned_pages = assign_sections(cleaned_pages)
+    if cleaned_pages:
+        print(f"\n[DEBUG] Contoh Section Tagging (Page {cleaned_pages[20]['page']}): Section -> {cleaned_pages[20].get('section', 'Unknown')}\n")
+
+    # 4. Chunking 
+    print("--- Tahap 4 Creating Chunks ---")
     chunks = create_chunks(cleaned_pages)
     if chunks:
         print(f"\n[DEBUG] Contoh Chunking (Chunk {chunks[20]['chunk_id']}):\n{chunks[20]['content'][:200]}...\n")
     
-    # 4. Storage (Data Layer) 
-    print(f"--- Tahap 4: Saving {len(chunks)} chunks to Parquet ---")
+    # 5. Storage (Data Layer) 
+    print(f"--- Tahap 5: Saving {len(chunks)} chunks to Parquet ---")
     df = pd.DataFrame(chunks)
     
     os.makedirs(os.path.dirname(PROCESSED_DATA_PATH), exist_ok=True)
