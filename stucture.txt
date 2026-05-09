@@ -8,22 +8,13 @@ rag-system-project/
 │   └── populate_db.py
 │
 ├── src/                   # core logic RAG
-│   ├── ingestion/
-│   │   └── ingest_pdf.py
-│   │
-│   ├── preprocessing/
-│   │   ├── clean_text.py
-│   │   ├── section_tagging.py
-│   │   └── chunking.py
-│   │
-│   ├── embedding/
-│   │   └── embedding.py
-│   │
-│   ├── vectordb/
-│   │   └── vector_store.py
-│   │
-│   └── retrieval/
-│       └── retrieval.py
+│   └── ingest_pdf.py
+│   ├── clean_text.py
+│   ├── section_tagging.py
+│   └── chunking.py
+│   └── embedding.py
+│   └── vector_store.py
+|   └── retrieval.py
 │
 ├── api/                  # FastAPI endpoint
 │   └── main.py

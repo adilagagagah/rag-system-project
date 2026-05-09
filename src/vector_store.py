@@ -16,9 +16,15 @@ class VectorStore:
         ids = df['chunk_id'].tolist()
         documents = df['content'].tolist()
         
-        # Menyertakan page dan section ke dalam metadata
-        sections = df.get('section', ['Unknown'] * len(df)).tolist()
-        metadatas = [{"page": int(p), "section": str(s)} for p, s in zip(df['page'].tolist(), sections)]
+        # Menyertakan page, bab, sub_bab, dan sub_sub_bab ke dalam metadata
+        babs = df.get('bab', ['Unknown'] * len(df)).tolist()
+        sub_babs = df.get('sub_bab', [''] * len(df)).tolist()
+        sub_sub_babs = df.get('sub_sub_bab', [''] * len(df)).tolist()
+
+        metadatas = [
+            {"page": int(p), "bab": str(b), "sub_bab": str(sb), "sub_sub_bab": str(ssb)}
+            for p, b, sb, ssb in zip(df['page'].tolist(), babs, sub_babs, sub_sub_babs)
+        ]
 
         self.collection.upsert(
             ids=ids,
