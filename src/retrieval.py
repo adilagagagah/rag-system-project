@@ -15,7 +15,8 @@ class Retriever:
     ):
         # get_embeddings mengembalikan sebuah list berisi embedding (numpy array)
         query_embedding_list = self.embedding_model.get_embeddings(
-            [query]
+            [query],
+            prefix="query: "
         )
         # Ambil embedding pertama (dan satu-satunya) dari list
         query_embedding = query_embedding_list[0]

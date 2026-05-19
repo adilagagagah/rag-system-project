@@ -20,6 +20,9 @@ class VectorStore:
         babs = df.get('bab', ['Unknown'] * len(df)).tolist()
         sub_babs = df.get('sub_bab', [''] * len(df)).tolist()
         sub_sub_babs = df.get('sub_sub_bab', [''] * len(df)).tolist()
+        babs = df['bab'].tolist() if 'bab' in df.columns else ['Unknown'] * len(df)
+        sub_babs = df['sub_bab'].tolist() if 'sub_bab' in df.columns else [''] * len(df)
+        sub_sub_babs = df['sub_sub_bab'].tolist() if 'sub_sub_bab' in df.columns else [''] * len(df)
 
         metadatas = [
             {"page": int(p), "bab": str(b), "sub_bab": str(sb), "sub_sub_bab": str(ssb)}
@@ -33,8 +36,9 @@ class VectorStore:
             metadatas=metadatas
         )
 
-    def query(self, query_embedding: list, n_results: int = 3):
+    def query(self, query_embedding: list, n_results: int = 3, where: dict = None):
         return self.collection.query(
             query_embeddings=[query_embedding],
-            n_results=n_results
+            n_results=n_results,
+            where=where
         )
